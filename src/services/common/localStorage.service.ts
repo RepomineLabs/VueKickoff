@@ -30,4 +30,8 @@ class LocalStorageService {
             localStorage.removeItem(keys[i])
         }
     }
+
+    clear = () => {
+        localStorage.clear()
+    }
 }
