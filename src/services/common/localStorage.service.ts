@@ -35,3 +35,5 @@ class LocalStorageService {
         localStorage.clear()
     }
 }
+
+export default new LocalStorageService()
