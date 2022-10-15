@@ -20,4 +20,8 @@ class LocalStorageService {
             }
         } else return undefined
     }
+
+    removeItem = (key: string) => {
+        localStorage.removeItem(key)
+    }
 }
