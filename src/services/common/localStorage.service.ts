@@ -9,4 +9,15 @@ class LocalStorageService {
             localStorage.setItem(key, byteValue)
         }
     }
+
+    getItem = (key: string) => {
+        const value = localStorage.getItem(key)
+        if (value) {
+            try {
+                return JSON.parse(decodeURIComponent(escape(window.atob(value))))
+            } catch (err) {
+                return decodeURIComponent(escape(window.atob(value)))
+            }
+        } else return undefined
+    }
 }
