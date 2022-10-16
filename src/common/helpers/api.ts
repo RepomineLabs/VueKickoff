@@ -15,6 +15,9 @@ abstract class Api {
 
         // Activate request interceptor
         this._initReqInterceptor()
+
+        // Activate response interceptor
+        this._initRespInterceptor()
     }
 
     // Request Interceptor
@@ -22,6 +25,14 @@ abstract class Api {
         this.instance.interceptors.request.use(
             this._handleReq,
             this._handleReqError,
+        )
+    }
+
+    // Response Interceptor
+    _initRespInterceptor = () => {
+        this.instance.interceptors.response.use(
+            this._handleResp,
+            this._handleRespError,
         )
     }
 
@@ -35,4 +46,13 @@ abstract class Api {
 
     // Calling in the interceptor > request.use
     _handleReqError = (error: Error) => Promise.reject(error)
+
+    // Calling in the interceptor > response.use
+    _handleResp = (response: AxiosResponse) => {
+        if (response && response.data && !response.data.IsSucceed && response.data.ErrorCode) {
+            return Promise.reject(response.data.ErrorCode)
+        } else {
+            return Promise.resolve(response)
+        }
+    }
 }
