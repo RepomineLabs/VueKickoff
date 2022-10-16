@@ -60,13 +60,13 @@ abstract class Api {
     // Debug error and starts the refresh token process if necessary.
     _handleRespError = (error: any) => {
         const config = error.config
-        if (config && config.url !== ".../Login" && error.response) {
+        if (config && config.url !== "Login" && error.response) {
             if (error.response?.status === 401 && !config._retry) {
                 config._retry = true;
                 return new Promise((resolve, reject) => {
                     const AccessToken = LocalStorageService.getItem(LOCAL_STORAGE_ACCESS_TOKEN)
                     const RefreshToken = LocalStorageService.getItem(LOCAL_STORAGE_REFRESH_TOKEN)
-                    this.instance.post('.../RefreshAccessToken', { RefreshToken, AccessToken })
+                    this.instance.post('RefreshAccessToken', { RefreshToken, AccessToken })
                         .then((response: any) => {
                             if (response.data.IsSucceed) {
                                 // 1) Store Auth to State
