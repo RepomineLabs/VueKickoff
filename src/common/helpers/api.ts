@@ -27,11 +27,12 @@ abstract class Api {
 
     // Calling in the interceptor > request.use
     _handleReq = (config: AxiosRequestConfig): AxiosRequestConfig => {
-        config.headers['Authorization'] = 'Bearer ' + LocalStorageService.getItem(LOCAL_STORAGE_ACCESS_TOKEN)
-
+        if (config && config.headers) {
+            config.headers['Authorization'] = 'Bearer ' + LocalStorageService.getItem(LOCAL_STORAGE_ACCESS_TOKEN)
+        }
         return config
     }
 
     // Calling in the interceptor > request.use
-    _handleReqError = (error) => Promise.reject(error)
+    _handleReqError = (error: Error) => Promise.reject(error)
 }
