@@ -1,5 +1,5 @@
 <template>
   <div>
-    Header
+    Header Component
   </div>
 </template>
